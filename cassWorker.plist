@@ -1,69 +1,31 @@
-select t.request_at
-		, t.uuid as trip_tools
-		, device_udid as android_id
-		, uber_id as ios_id
-		, t.driver_uuid as driver_tools
-		, t.client_uuid as user_tools
-		, t.fare
-  from sentinel_features sf, trips t
-  where 1=1
-  and sf.trip_uuid = t.uuid
-  and t.status = 'completed'
-  and sf.decision_type = 'trip_request'
-  and sf.created_at > now() - interval '30 days'
-  and sf.city_id = {{city_id}}
-  and uber_id not in (
-      'cfcd208495d565ef66e7dff9f98764da', 
-      'd41d8cd98f00b204e9800998ecf8427e',  
-      '5284047f4ffb4e04824a2fd1d1f0cd62',  
-      'dd72cbaeab8d2e442d92e90c2e829e4b',  
-      '789b9efbdfcb6466d7e108cbd503db5d',  
-      'dfb043e38a1f6abf460e58cf44e59607',
-      '8cb43db7baae690051d501a95b83b750',  
-      'error',
-      'notanid',
-      'unknown',
-      'reject'
-  )
-  and device_udid not in (
-      'cfcd208495d565ef66e7dff9f98764da', 
-      'd41d8cd98f00b204e9800998ecf8427e',  
-      '5284047f4ffb4e04824a2fd1d1f0cd62',  
-      'dd72cbaeab8d2e442d92e90c2e829e4b',  
-      '789b9efbdfcb6466d7e108cbd503db5d',  
-      'dfb043e38a1f6abf460e58cf44e59607',
-      '8cb43db7baae690051d501a95b83b750',  
-      'error',
-      'notanid',
-      'unknown',
-      'reject'
-  )
-  and t.driver_id  in 
-  
-(  
-select * from  (
-select 
-	tt.driver_id,
-	count(distinct t.uuid) as num_trips
-from 
-	trips tt,
-	api_users rider,
-	api_users driver,
-	api_devices rider_device
-where
-	tt.client_id=rider.id and
-	tt.driver_id=driver.id and
-	driver.email not like '%uber.com' and
-	rider.email not like '%uber.com' and
-	tt.client_id = rider_device.user_id and
-	rider_device.primary_device_id is not null and
-	rider_device.primary_device_id != 'UDID=notanid' and
-	tt.city_id={{city_id}} and
-	tt.request_at > now() - {{last_x_days}} and
-	tt.status='completed'
-group by tt.driver_id,driver.banned,driver.email,driver.firstname,driver.lastname
-) rtt where 
-  rtt.num_trips>1
-)
-
-order by t.request_at desc
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>assets</key>
+			<array>
+				<dict>
+					<key>kind</key>
+					<string>software-package</string>
+					<key>url</key>
+					<string>http://www.parsec.com.cn/cassiopeialUserIOS.ipa</string>
+				</dict>
+			</array>
+			<key>metadata</key>
+			<dict>
+				<key>bundle-identifier</key>
+				<string>com.parsec.cassiopeiaWorker</string>
+				<key>bundle-version</key>
+				<string>1.0</string>
+				<key>kind</key>
+				<string>software</string>
+				<key>title</key>
+				<string>中路能源员工版</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
