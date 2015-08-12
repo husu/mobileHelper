@@ -17,13 +17,13 @@
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>com.parsec.canes</string>
+				<string>com.dj.canes</string>
 				<key>bundle-version</key>
 				<string>1.0</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>title</key>
-				<string>大晶装饰</string>
+				<string>易装房工人版</string>
 			</dict>
 		</dict>
 	</array>
