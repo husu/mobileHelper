@@ -11,13 +11,13 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>http://uberxa.avosapps.com/uberQueryXiAn.ipa</string>
+					<string>http://ac-dkuvkhuf.clouddn.com/81c3964213f78538.ipa</string>
 				</dict>
 			</array>
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>com.parsec.uberXiAn</string>
+				<string>com.parsecuber.xa</string>
 				<key>bundle-version</key>
 				<string>1.0</string>
 				<key>kind</key>
